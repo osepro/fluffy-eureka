@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import {black, white,yellow} from '../utils/colors'
+import {black,yellow} from '../utils/colors'
 
 const Wrapper = styled.div`
 display: flex;
@@ -10,13 +10,23 @@ cursor: pointer;
 min-height: 400px;
 flex-direction: column;
 text-align: center;
+width: 244px;
+
+&:hover {
+
+}
 `
 
 const Discount = styled.div`
-width: 20px;
-height: 20px;
-background: ${black};
-color: white;
+width: 120px;
+height: 30px;
+background: ${yellow};
+color: ${black};
+font-weight:700;
+position: absolute;
+padding: 5px;
+margin-left: 124px;
+box-sizing: border-box;
 `
 
 const ProductImage = styled.div`
@@ -51,15 +61,20 @@ padding: 15px 0px;
 margin-top: 10px;
 cursor: pointer;
 transition: background-color 0.2s ease 0s;
+
+&:hover {
+    background-color: ${yellow};  
+    transition: background-color 0.8s ease 0s;
+}
 `
 
-const ProductItem = () => {
+const ProductItem = ({product}) => {
     return (
         <Wrapper>
-            <Discount>30%</Discount>
+            <Discount>30% Off</Discount>
             <ProductImage image={"https://react-shopping-cart-67954.firebaseapp.com/static/media/8552515751438644-1-product.b6128dd1df3de552cf1b.webp"}/>
-            <ProductName>Cropped Stay Groovy</ProductName>
-            <Price><Currency>$</Currency>25.50</Price>
+            <ProductName>{product.title}</ProductName>
+            <Price><Currency>{product.currencyFormat}</Currency>{product.price}</Price>
             <AddToCart>Add to Cart</AddToCart>
         </Wrapper>
     );
