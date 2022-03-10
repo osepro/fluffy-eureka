@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import {black,yellow, white} from '../utils/colors'
+import { price } from "../utils/format"
 
 const AddToCart = styled.div`
 background-color: rgb(27, 26, 32);
@@ -81,7 +82,7 @@ const ProductItem = ({product}) => {
             <Discount>30% Off</Discount>
             <ProductImage sku={product.sku}/>
             <ProductName>{product.title}</ProductName>
-            <Price><Currency>{product.currencyFormat}</Currency>{product.price}</Price>
+            <Price><Currency>{product.currencyFormat}</Currency>{price(product.price)}</Price>
             <AddToCart>Add to Cart</AddToCart>
         </Wrapper>
     );

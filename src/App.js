@@ -1,6 +1,5 @@
 import styled from 'styled-components'
-import SideBar from "./components/SideBar"
-import Products from "./components/Products"
+import Main from "./components/Main"
 
 const Wrapper = styled.div`
 display: flex;
@@ -12,8 +11,7 @@ padding: 5%;
 function App() {
   return (
     <Wrapper>
-      <SideBar />
-      <Products />
+      <Main />
     </Wrapper>
   );
 }

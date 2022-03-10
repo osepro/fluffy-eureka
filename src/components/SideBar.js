@@ -13,13 +13,13 @@ font-size: 15px;
 `
 
 
-const SideBar = () => {
-    const sizes = ["XS","S", "M", "ML","L","XL","XXL"]
+const SideBar = ({filterBySize,activeBtn}) => {
+    const sizes = ["XS","S", "M", "ML","L","XL","XXL", "All"]
     return (
         <Wrapper>
             <SizeLabel>Sizes:</SizeLabel>
             {
-                sizes.map((size) => <Button name={size} key={size} sortSize={()=>{}}/>)
+                sizes.map((size) => <Button name={size} key={size} sortSize={()=>filterBySize(size)} activeBtn={activeBtn} />)
             }
         </Wrapper>
     );
