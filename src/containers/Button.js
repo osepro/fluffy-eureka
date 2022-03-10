@@ -12,11 +12,13 @@ const Size = styled.button`
     font-size: 0.7em;
     text-align: center;
     cursor: pointer;
+
+    &:ac
 `
 
-const Button = ({name, sortSize}) => {
+const Button = ({ name, sortSize, activeBtn }) => {
     return (
-        <Size onClick={()=>sortSize(name)}>
+        <Size onClick={()=>sortSize(name)} className={activeBtn === name? name: ""}>
             {name}
         </Size>
     );
