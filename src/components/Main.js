@@ -17,6 +17,7 @@ const Main = () => {
     const filterBySize=(currentSize)=>{
       if(currentSize === "All") {
         setProduct(allProducts)
+        setActiveBtn("All")
       } else {
         const result  =allProducts.filter(product => product.availableSizes.some((size) => size === currentSize))
         setProduct(result)
