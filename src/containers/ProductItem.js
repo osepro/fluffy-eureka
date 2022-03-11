@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import {black,yellow, white} from '../utils/colors'
 import { price } from "../utils/format"
 
@@ -20,6 +20,16 @@ background-repeat: no-repeat;
 background-size: cover;
 background-position: center center;
 `
+const wrapperAnimation = keyframes`
+0% {width: 0px }
+100% {width: 244px }
+`
+
+const discountAnimation = keyframes`
+0% {opacity: 0 }
+100% {width: 1 }
+`
+
 const Discount = styled.div`
 width: 120px;
 height: 30px;
@@ -30,6 +40,9 @@ position: absolute;
 padding: 5px;
 margin-left: 124px;
 box-sizing: border-box;
+animation-name: ${discountAnimation};
+animation-duration: 1s;
+animation-iteration-count: 1;
 `
 
 const Wrapper = styled.div`
@@ -41,6 +54,9 @@ min-height: 400px;
 flex-direction: column;
 text-align: center;
 width: 244px;
+animation-name: ${wrapperAnimation};
+animation-duration: 1s;
+animation-iteration-count: 1;
 
 &:hover {
     ${AddToCart} {
