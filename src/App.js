@@ -1,18 +1,21 @@
+import { Provider } from "react-redux";
 import styled from 'styled-components'
+import store from "./store"
 import Main from "./components/Main"
 
 const Wrapper = styled.div`
 display: flex;
 flex-direction: row;
 flex: 1;
-padding: 5%;
 `
 
 function App() {
   return (
-    <Wrapper>
-      <Main />
-    </Wrapper>
+    <Provider store={store}>
+      <Wrapper>
+        <Main />
+      </Wrapper>
+    </Provider>
   );
 }
 

@@ -6,6 +6,8 @@ const Wrapper= styled.div`
     height: 200px;
     width: 200px;
     margin-top: 10px;
+    padding-left: 5%;
+    margin-top: 5%;
 `
 
 const SizeLabel = styled.h1`
