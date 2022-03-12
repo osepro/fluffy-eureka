@@ -2,6 +2,8 @@ import React from 'react';
 import styled, { keyframes } from 'styled-components';
 import {black,yellow, white} from '../utils/colors'
 import { price } from "../utils/format"
+import { addToCart } from "../actions"
+import { useSelector, useDispatch } from 'react-redux'
 
 const AddToCart = styled.div`
 background-color: rgb(27, 26, 32);
@@ -36,8 +38,9 @@ height: 30px;
 background: ${yellow};
 color: ${black};
 font-weight:700;
+font-size: 12px;
 position: absolute;
-padding: 5px;
+padding: 7px;
 margin-left: 124px;
 box-sizing: border-box;
 animation-name: ${discountAnimation};
@@ -93,13 +96,14 @@ color: ${yellow};
 `
 
 const ProductItem = ({product}) => {
+    const dispatch = useDispatch();
     return (
         <Wrapper>
-            <Discount>30% Off</Discount>
+            <Discount>{product.isFreeShipping? "Free Shipping" : "2 days Shipping"}</Discount>
             <ProductImage sku={product.sku}/>
             <ProductName>{product.title}</ProductName>
             <Price><Currency>{product.currencyFormat}</Currency>{price(product.price)}</Price>
-            <AddToCart>Add to Cart</AddToCart>
+            <AddToCart onClick={()=>dispatch(addToCart(product))}>Add to Cart</AddToCart>
         </Wrapper>
     );
 };

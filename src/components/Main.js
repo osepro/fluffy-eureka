@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import Products from './Products'
 import SideBar from './SideBar'
+import Cart from './Cart'
 import fetchData from "../api"
 
 const Main = () => {
@@ -30,6 +31,7 @@ const Main = () => {
     <>
         <SideBar filterBySize={filterBySize} activeBtn={activeBtn} />
         <Products products={products} />
+        <Cart />
     </>
     );
 };
