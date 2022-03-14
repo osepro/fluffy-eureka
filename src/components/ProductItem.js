@@ -3,7 +3,7 @@ import styled, { keyframes } from 'styled-components';
 import {black,yellow, white} from '../utils/colors'
 import { price } from "../utils/format"
 import { addToCart } from "../actions"
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 
 const AddToCart = styled.div`
 background-color: rgb(27, 26, 32);
