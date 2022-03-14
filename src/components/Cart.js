@@ -1,15 +1,18 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { white, blue, yellow, jetblack, charcoal, red } from '../utils/colors'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { RiDeleteBin5Line } from "react-icons/ri";
-import { AiOutlinePlusSquare } from "react-icons/ai";
+import { AiOutlinePlusSquare, AiOutlineMinusSquare } from "react-icons/ai";
+import { RiShoppingBasketLine } from "react-icons/ri";
+import { increaseQty, decreaseQty, deleteItem } from "../actions"
 
 const Wrapper = styled.div`
 display: flex;
 justify-content: center;
 height: 0px;
 position: fixed;
+z-index: 5;
 width: 100%;
 bottom: 0;
 flex-direction: column;
@@ -48,12 +51,13 @@ font-size: 15px;
 `
 
 const MainItems = styled.div`
-min-height: ${({isCartOpen}) => isCartOpen? "800px":"5px"};
+height: ${({isCartOpen}) => isCartOpen? "900px":"5px"};
 background: ${jetblack};
+padding-top: 15px;
 width: 100%;
 border-top: solid ${({isCartOpen}) => isCartOpen? "5px":"0"} ${blue};
-transition: min-height 0.8s ease 0s;
-overflow: scroll;
+transition: height 0.8s ease 0s;
+overflow-y: scroll;
 `
 
 const MainTable = styled.table`
@@ -72,51 +76,73 @@ background: ${charcoal};
 text-align: center;
 `
 
+const ProductImage = styled.div`
+width: 100%;
+height: 48px;
+background-image: url(${({sku})=> require(`../static/products/${sku}-1-cart.webp`)});
+background-repeat: no-repeat;
+background-size: cover;
+background-position: center center;
+`
+
 const MainTableTd = styled.td`
 color: ${white};
 font-size: 13px;
 padding: 15px;
 `
 
-const itemQuantity = (sku,products)=>{
-    let quantity = products.filter(product=>product.sku === sku)
-    return quantity.length
-}
+const CheckoutBtn = styled.div`
+display : flex;
+font-weight: 700;
+background: ${red};
+color: ${white};
+width: 50%;
+margin-left: 25%;
+justify-content: center;
+padding:10px;
+cursor: pointer;
+margin-top:10px;
+`
 
 const Cart = () => {
+    const dispatch = useDispatch();
     const { cart } = useSelector((state) => ({ cart: state.cartItems}))
     const [isCartOpen, setCartOpen] = useState(0)
+
     return (
         <Wrapper>
             <MainWrapper>
-                <MainCart isCartEmpty={cart.length} onClick={()=>setCartOpen(!isCartOpen)}>
-                    <MainCartCount>{cart.length}</MainCartCount>
+                <MainCart isCartEmpty={Object.keys(cart).length} onClick={()=>setCartOpen(!isCartOpen)}>
+                    <MainCartCount>{Object.keys(cart).length}</MainCartCount>
                 </MainCart>
                 <MainItems isCartOpen={isCartOpen}>
                     <MainTable>
                         <MainTableHead>
                         <MainTableTr>
-                                <MainTableTd>{"Qty"}</MainTableTd>
+                                <MainTableTd></MainTableTd>
                                 <MainTableTd>{"Item"}</MainTableTd>
+                                <MainTableTd>{"Qty"}</MainTableTd>
                                 <MainTableTd>{"Price"}</MainTableTd>
                                 <MainTableTd></MainTableTd>
                                 <MainTableTd></MainTableTd>
                             </MainTableTr>
                         </MainTableHead>
-                        {cart.map((product) => 
-                        (<MainTableBody>
+                        {Object.keys(cart).map((product) => 
+                        (<MainTableBody key={cart[product].sku}>
                             <MainTableTr>
-                                <MainTableTd>{itemQuantity(product.sku,cart)}</MainTableTd>
-                                <MainTableTd>{product.title} - {product.style}</MainTableTd>
-                                <MainTableTd>{product.currencyFormat}{product.price}</MainTableTd>
-                                <MainTableTd style={{cursor: 'pointer'}}><AiOutlinePlusSquare /></MainTableTd>
-                                <MainTableTd style={{cursor: 'pointer'}}><RiDeleteBin5Line color={red} /></MainTableTd>
+                                <MainTableTd><ProductImage sku={cart[product].sku} /></MainTableTd>
+                                <MainTableTd>{cart[product].title} - {cart[product].style}</MainTableTd>
+                                <MainTableTd>{cart[product].qty}</MainTableTd>
+                                <MainTableTd>{cart[product].currencyFormat}{cart[product].price}</MainTableTd>
+                                <MainTableTd style={{cursor: 'pointer'}}><AiOutlinePlusSquare onClick={()=>dispatch(increaseQty(cart[product].sku))} /> <AiOutlineMinusSquare onClick={()=>dispatch(decreaseQty(cart[product].sku))} /></MainTableTd>
+                                <MainTableTd style={{cursor: 'pointer'}}><RiDeleteBin5Line color={red} onClick={()=>dispatch(deleteItem(cart[product].sku))} /></MainTableTd>
                             </MainTableTr>
                         </MainTableBody>)
                         )}
                     </MainTable>
+                    <CheckoutBtn>Checkout <RiShoppingBasketLine /></CheckoutBtn>
                 </MainItems>
-            </MainWrapper>           
+            </MainWrapper>    
         </Wrapper>
     );
 };
