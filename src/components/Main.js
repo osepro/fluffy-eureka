@@ -9,10 +9,13 @@ const Main = () => {
     const [allProducts, setAllProduct] = useState([])
     const [activeBtn, setActiveBtn] = useState("All")
 
-    useEffect(async()=>{
+    useEffect(()=>{
+      async function getProducts() {
         const result = await fetchData()
         setAllProduct(result)
         setProduct(result)
+      }
+      getProducts()
     },[])
 
     const filterBySize=(currentSize)=>{

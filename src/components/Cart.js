@@ -6,6 +6,7 @@ import { RiDeleteBin5Line } from "react-icons/ri";
 import { AiOutlinePlusSquare, AiOutlineMinusSquare } from "react-icons/ai";
 import { RiShoppingBasketLine } from "react-icons/ri";
 import { increaseQty, decreaseQty, deleteItem } from "../actions"
+import { price } from "../utils/format"
 
 const Wrapper = styled.div`
 display: flex;
@@ -51,7 +52,7 @@ font-size: 15px;
 `
 
 const MainItems = styled.div`
-height: ${({isCartOpen}) => isCartOpen? "900px":"5px"};
+height: ${({isCartOpen}) => isCartOpen? "1500px":"5px"};
 background: ${jetblack};
 padding-top: 15px;
 width: 100%;
@@ -103,6 +104,10 @@ padding:10px;
 cursor: pointer;
 margin-top:10px;
 `
+const Price = styled.span`
+color: ${yellow};
+font-size: 14px;
+`
 
 const Cart = () => {
     const dispatch = useDispatch();
@@ -133,7 +138,7 @@ const Cart = () => {
                                 <MainTableTd><ProductImage sku={cart[product].sku} /></MainTableTd>
                                 <MainTableTd>{cart[product].title} - {cart[product].style}</MainTableTd>
                                 <MainTableTd>{cart[product].qty}</MainTableTd>
-                                <MainTableTd>{cart[product].currencyFormat}{cart[product].price}</MainTableTd>
+                                <MainTableTd><Price>{cart[product].currencyFormat}{price(cart[product].price * cart[product].qty)}</Price></MainTableTd>
                                 <MainTableTd style={{cursor: 'pointer'}}><AiOutlinePlusSquare onClick={()=>dispatch(increaseQty(cart[product].sku))} /> <AiOutlineMinusSquare onClick={()=>dispatch(decreaseQty(cart[product].sku))} /></MainTableTd>
                                 <MainTableTd style={{cursor: 'pointer'}}><RiDeleteBin5Line color={red} onClick={()=>dispatch(deleteItem(cart[product].sku))} /></MainTableTd>
                             </MainTableTr>
