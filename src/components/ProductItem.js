@@ -99,7 +99,7 @@ const ProductItem = ({product}) => {
     const dispatch = useDispatch();
     return (
         <Wrapper>
-            <Discount>{product.isFreeShipping? "Free Shipping" : "2 days Shipping"}</Discount>
+            <Discount>{product.isFreeShipping? "Free Shipping" : "2 Day Shipping"}</Discount>
             <ProductImage sku={product.sku}/>
             <ProductName>{product.title}</ProductName>
             <Price><Currency>{product.currencyFormat}</Currency>{price(product.price)}</Price>
