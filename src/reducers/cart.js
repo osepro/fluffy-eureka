@@ -1,4 +1,4 @@
-import { ADD_TO_CART, QUANTITY_INCREASE, QUANTITY_DECREASE, DELETE_ITEM } from "../constants";
+import { ADD_TO_CART, QUANTITY_INCREASE, QUANTITY_DECREASE, DELETE_ITEM, CHECKOUT } from "../constants";
 
 export default function cartReducer(state = {}, action) {
 	switch (action.type) {
@@ -28,6 +28,12 @@ export default function cartReducer(state = {}, action) {
 		case DELETE_ITEM:
 			delete state[action.payload]
 			return {...state}
+		
+		case CHECKOUT:
+			let allItems = {}
+			state = allItems;
+			return state
+		
 		default:
 			return state;
 	}

@@ -1,4 +1,4 @@
-import { ADD_TO_CART, QUANTITY_INCREASE, QUANTITY_DECREASE, DELETE_ITEM } from "../constants";
+import { ADD_TO_CART, QUANTITY_INCREASE, QUANTITY_DECREASE, DELETE_ITEM, CHECKOUT } from "../constants";
 
 export function addToCart(product) {
 	return {
@@ -25,5 +25,11 @@ export function deleteItem(sku) {
 	return {
 		type: DELETE_ITEM,
 		payload: sku
+	}
+} 
+
+export function checkout() {
+	return {
+		type: CHECKOUT,
 	}
 }
