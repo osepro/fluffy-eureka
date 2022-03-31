@@ -27,7 +27,7 @@ const Main = () => {
         setProduct(result)
         setActiveBtn(currentSize)
       }
-       
+
     }
 
     return (

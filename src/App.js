@@ -7,6 +7,7 @@ const Wrapper = styled.div`
 display: flex;
 flex-direction: row;
 flex: 1;
+z-index: 1;
 `
 
 function App() {
