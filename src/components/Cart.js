@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { white, blue, yellow, jetblack, charcoal, red, black, gray2, green } from '../utils/colors'
+import { white, blue, yellow, jetblack, charcoal, red, black, gray2 } from '../utils/colors'
 import { useSelector, useDispatch } from 'react-redux'
 import { RiDeleteBin5Line } from "react-icons/ri";
 import { AiOutlinePlusSquare, AiOutlineMinusSquare } from "react-icons/ai";
@@ -50,13 +50,15 @@ font-size: 15px;
 `
 
 const MainItems = styled.div`
+position: relative;
+z-index: 0;
+overflow-y: scroll;
 height: ${({isCartOpen}) => isCartOpen? "1500px":"5px"};
 background: ${jetblack};
 padding-top: 15px;
 width: 100%;
 border-top: solid ${({isCartOpen}) => isCartOpen? "5px":"0"} ${blue};
 transition: height 0.8s ease 0s;
-overflow-y: scroll;
 `
 
 const MainTable = styled.table`
@@ -150,7 +152,7 @@ const Cart = () => {
     if(Object.keys(cart).length > 0) {
         setCheckoutMessage("")
     }
-   },[checkoutMessage])
+   },[checkoutMessage,cart])
 
     return (
         <Wrapper>
